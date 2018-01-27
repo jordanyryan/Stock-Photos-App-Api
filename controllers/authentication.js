@@ -7,13 +7,18 @@ function tokenForUser(user) {
   return jwt.encode({ sub: user.id, iat: timeStamp}, config.secret);
 }
 
+exports.signin = function(req, res, next) {
+  // User has already had email and password authenticated
+  // Just need to give them a token
+  res.send({token: tokenForUser(req.user)});
+}
 
 exports.signup = function(req,res,next) {
   const {email, password} = req.body;
 
   //See if a user with given email exists
   User.findOne({email}, function(e, existingUser) {
-    if(e) { return next(err) }
+    if(e) { return next(e) }
 
     if(!email || !password) return res.status(422).send({error: "You must provide email and password"});
 
