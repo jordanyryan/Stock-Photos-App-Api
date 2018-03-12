@@ -10,6 +10,8 @@ module.exports = function(app) {
     res.send({message: "secret message is SUPERSECRET"});
   })
 
+  app.get('/users/:userId', Authentication.findUser)
+
   app.post('/signin', requireSignin, Authentication.signin);
   app.post('/signup', Authentication.signup)
 }
