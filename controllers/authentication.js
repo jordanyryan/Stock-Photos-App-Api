@@ -40,8 +40,8 @@ exports.signup = function(req,res,next) {
 
 exports.findUser = function(req, res) {
   User.findById(req.params.userId)
-  .then(function({firstName, lastName}) {
-    res.json({firstName, lastName});
+  .then(function({firstName, lastName, likedPhotos}) {
+    res.json({firstName, lastName, likedPhotos});
   })
   .catch(function(e) {
     res.send(e);
