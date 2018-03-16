@@ -1,6 +1,7 @@
 const Authentication = require('./controllers/authentication');
 const passportService = require('./services/passport');
 const passport = require('passport');
+const User = require('./controllers/user');
 
 const requireAuth = passport.authenticate('jwt', { session: false});
 const requireSignin = passport.authenticate('local', {session: false});
@@ -11,6 +12,7 @@ module.exports = function(app) {
   })
 
   app.get('/users/:userId', Authentication.findUser)
+  app.post('/users/:userId', User.likePhoto)
 
   app.post('/signin', requireSignin, Authentication.signin);
   app.post('/signup', Authentication.signup)

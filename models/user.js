@@ -4,11 +4,12 @@ const Schema = mongoose.Schema;
 
 // Define model
 const userSchema = new Schema({
+  _id: Schema.Types.ObjectId,
   email: {type: String, unique: true, lowercase: true},
   password: String,
   firstName: String,
   lastName: String,
-  likedPhotos: [{type: String}]
+  likedPhotos: [{ type: Schema.Types.ObjectId, ref: 'photo'}],
 });
 
 // On save hook, encrypt password
