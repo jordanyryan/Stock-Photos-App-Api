@@ -15,8 +15,8 @@ mongoose.connect('mongodb://localhost:auth/auth');
 // App Setup
 app.use(morgan('combined'));
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 router(app);
 
 

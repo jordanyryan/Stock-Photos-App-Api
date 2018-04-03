@@ -10,7 +10,7 @@ const userSchema = new Schema({
   password: String,
   firstName: String,
   lastName: String,
-  likedPhotos: [String]
+  likedPhotos: [{url: String}]
 });
 
 // On save hook, encrypt password
