@@ -2,14 +2,15 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 const Schema = mongoose.Schema;
 
+mongoose.plugin(schema => { schema.options.usePushEach = true });
+
 // Define model
 const userSchema = new Schema({
-  _id: Schema.Types.ObjectId,
   email: {type: String, unique: true, lowercase: true},
   password: String,
   firstName: String,
   lastName: String,
-  likedPhotos: [{ type: Schema.Types.ObjectId, ref: 'photo'}],
+  likedPhotos: [String]
 });
 
 // On save hook, encrypt password

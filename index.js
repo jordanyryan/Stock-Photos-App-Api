@@ -7,8 +7,9 @@ const router = require('./router')
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-
+mongoose.Promise = global.Promise;
 //DB SETUP
+
 mongoose.connect('mongodb://localhost:auth/auth');
 
 // App Setup

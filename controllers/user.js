@@ -2,25 +2,16 @@ const User = require('../models/user');
 const Photo = require('../models/photo');
 
 exports.likePhoto = function(req,res) {
-  const {url} = req.body;
-  console.log(User.find({}))
-  
+  const {photoId} = req.body;  
   User.findById(req.params.userId)
   .then(function(user) {
     user.save(function (err) {
       if (err) return res.status(422).send({error: "User is not found"});
-
-      const photo = new Photo({
-        url
-      });
-      photo.fans.push(user);
-      user.likedPhotos.push(photo);
-
-      photo.save(function (err) {
-        if (err) return res.status(422).send({error: "Photo could not be found"});
-      });
-      user.save();
-      res.send(photo)
+      console.log(photoId)
+      user.likedPhotos.push(photoId);
+      user.save().then(user => {
+        res.send(user)
+      })
     });
   })
   .catch(function(e) {
@@ -28,12 +19,10 @@ exports.likePhoto = function(req,res) {
   })
 }
 
-
-
-// User.findById(req.params.userId)
-// .then(function({firstName, lastName, likedPhotos}) {
-//   res.json({firstName, lastName, likedPhotos});
-// })
-// .catch(function(e) {
-//   res.send(e);
-// })
+exports.findUser = function(req,res) {
+  const {userId} = req.params;
+  User.findById(userId)
+    .then(user => {
+      res.send(user);
+    })
+}

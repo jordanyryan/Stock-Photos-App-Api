@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const photoSchema = new Schema({
   fans: [{ type: Schema.Types.ObjectId, ref: 'user' }],
-  url: String
+  author: { type: Schema.Types.ObjectId, ref: 'user' }
 })
 
 const PhotoClass = mongoose.model('photo', photoSchema);

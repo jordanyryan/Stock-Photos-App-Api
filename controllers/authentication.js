@@ -37,13 +37,3 @@ exports.signup = function(req,res,next) {
     res.json({token: tokenForUser(user)});
   });
 }
-
-exports.findUser = function(req, res) {
-  User.findById(req.params.userId)
-  .then(function({firstName, lastName, likedPhotos}) {
-    res.json({firstName, lastName, likedPhotos});
-  })
-  .catch(function(e) {
-    res.send(e);
-  })
-}
